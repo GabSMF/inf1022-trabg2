@@ -1,0 +1,1019 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> programa
+Rule 1     programa -> INICIO varlist monitor_varlist EXECUTE cmds TERMINO
+Rule 2     monitor_varlist -> MONITOR varlist
+Rule 3     varlist -> ID COMMA varlist
+Rule 4     varlist -> ID
+Rule 5     cmds -> cmd cmds
+Rule 6     cmds -> cmd
+Rule 7     cmd -> while
+Rule 8     cmd -> if
+Rule 9     cmd -> ifelse
+Rule 10    cmd -> plus
+Rule 11    cmd -> times
+Rule 12    cmd -> eval
+Rule 13    cmd -> zero
+Rule 14    cmd -> equal
+Rule 15    while -> ENQUANTO ID FACA cmds FIM
+Rule 16    if -> IF ID THEN cmd
+Rule 17    ifelse -> IF ID THEN cmd ELSE cmd
+Rule 18    eval -> EVAL LPAREN ID COMMA ID COMMA cmds RPAREN
+Rule 19    plus -> ID PLUS exp
+Rule 20    plus -> NUM PLUS exp
+Rule 21    times -> ID TIMES exp
+Rule 22    times -> NUM TIMES exp
+Rule 23    exp -> ID
+Rule 24    exp -> NUM
+Rule 25    exp -> plus
+Rule 26    exp -> times
+Rule 27    zero -> ZERO LPAREN ID RPAREN
+Rule 28    equal -> ID EQUAL exp
+
+Terminals, with rules where they appear
+
+COMMA                : 3 18 18
+ELSE                 : 17
+ENQUANTO             : 15
+EQUAL                : 28
+EVAL                 : 18
+EXECUTE              : 1
+FACA                 : 15
+FIM                  : 15
+ID                   : 3 4 15 16 17 18 18 19 21 23 27 28
+IF                   : 16 17
+INICIO               : 1
+LPAREN               : 18 27
+MONITOR              : 2
+NUM                  : 20 22 24
+PLUS                 : 19 20
+RPAREN               : 18 27
+TERMINO              : 1
+THEN                 : 16 17
+TIMES                : 21 22
+ZERO                 : 27
+error                : 
+
+Nonterminals, with rules where they appear
+
+cmd                  : 5 6 16 17 17
+cmds                 : 1 5 15 18
+equal                : 14
+eval                 : 12
+exp                  : 19 20 21 22 28
+if                   : 8
+ifelse               : 9
+monitor_varlist      : 1
+plus                 : 10 25
+programa             : 0
+times                : 11 26
+varlist              : 1 2 3
+while                : 7
+zero                 : 13
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . programa
+    (1) programa -> . INICIO varlist monitor_varlist EXECUTE cmds TERMINO
+
+    INICIO          shift and go to state 2
+
+    programa                       shift and go to state 1
+
+state 1
+
+    (0) S' -> programa .
+
+
+
+state 2
+
+    (1) programa -> INICIO . varlist monitor_varlist EXECUTE cmds TERMINO
+    (3) varlist -> . ID COMMA varlist
+    (4) varlist -> . ID
+
+    ID              shift and go to state 4
+
+    varlist                        shift and go to state 3
+
+state 3
+
+    (1) programa -> INICIO varlist . monitor_varlist EXECUTE cmds TERMINO
+    (2) monitor_varlist -> . MONITOR varlist
+
+    MONITOR         shift and go to state 6
+
+    monitor_varlist                shift and go to state 5
+
+state 4
+
+    (3) varlist -> ID . COMMA varlist
+    (4) varlist -> ID .
+
+    COMMA           shift and go to state 7
+    MONITOR         reduce using rule 4 (varlist -> ID .)
+    EXECUTE         reduce using rule 4 (varlist -> ID .)
+
+
+state 5
+
+    (1) programa -> INICIO varlist monitor_varlist . EXECUTE cmds TERMINO
+
+    EXECUTE         shift and go to state 8
+
+
+state 6
+
+    (2) monitor_varlist -> MONITOR . varlist
+    (3) varlist -> . ID COMMA varlist
+    (4) varlist -> . ID
+
+    ID              shift and go to state 4
+
+    varlist                        shift and go to state 9
+
+state 7
+
+    (3) varlist -> ID COMMA . varlist
+    (3) varlist -> . ID COMMA varlist
+    (4) varlist -> . ID
+
+    ID              shift and go to state 4
+
+    varlist                        shift and go to state 10
+
+state 8
+
+    (1) programa -> INICIO varlist monitor_varlist EXECUTE . cmds TERMINO
+    (5) cmds -> . cmd cmds
+    (6) cmds -> . cmd
+    (7) cmd -> . while
+    (8) cmd -> . if
+    (9) cmd -> . ifelse
+    (10) cmd -> . plus
+    (11) cmd -> . times
+    (12) cmd -> . eval
+    (13) cmd -> . zero
+    (14) cmd -> . equal
+    (15) while -> . ENQUANTO ID FACA cmds FIM
+    (16) if -> . IF ID THEN cmd
+    (17) ifelse -> . IF ID THEN cmd ELSE cmd
+    (19) plus -> . ID PLUS exp
+    (20) plus -> . NUM PLUS exp
+    (21) times -> . ID TIMES exp
+    (22) times -> . NUM TIMES exp
+    (18) eval -> . EVAL LPAREN ID COMMA ID COMMA cmds RPAREN
+    (27) zero -> . ZERO LPAREN ID RPAREN
+    (28) equal -> . ID EQUAL exp
+
+    ENQUANTO        shift and go to state 21
+    IF              shift and go to state 23
+    ID              shift and go to state 22
+    NUM             shift and go to state 24
+    EVAL            shift and go to state 25
+    ZERO            shift and go to state 26
+
+    cmds                           shift and go to state 11
+    cmd                            shift and go to state 12
+    while                          shift and go to state 13
+    if                             shift and go to state 14
+    ifelse                         shift and go to state 15
+    plus                           shift and go to state 16
+    times                          shift and go to state 17
+    eval                           shift and go to state 18
+    zero                           shift and go to state 19
+    equal                          shift and go to state 20
+
+state 9
+
+    (2) monitor_varlist -> MONITOR varlist .
+
+    EXECUTE         reduce using rule 2 (monitor_varlist -> MONITOR varlist .)
+
+
+state 10
+
+    (3) varlist -> ID COMMA varlist .
+
+    MONITOR         reduce using rule 3 (varlist -> ID COMMA varlist .)
+    EXECUTE         reduce using rule 3 (varlist -> ID COMMA varlist .)
+
+
+state 11
+
+    (1) programa -> INICIO varlist monitor_varlist EXECUTE cmds . TERMINO
+
+    TERMINO         shift and go to state 27
+
+
+state 12
+
+    (5) cmds -> cmd . cmds
+    (6) cmds -> cmd .
+    (5) cmds -> . cmd cmds
+    (6) cmds -> . cmd
+    (7) cmd -> . while
+    (8) cmd -> . if
+    (9) cmd -> . ifelse
+    (10) cmd -> . plus
+    (11) cmd -> . times
+    (12) cmd -> . eval
+    (13) cmd -> . zero
+    (14) cmd -> . equal
+    (15) while -> . ENQUANTO ID FACA cmds FIM
+    (16) if -> . IF ID THEN cmd
+    (17) ifelse -> . IF ID THEN cmd ELSE cmd
+    (19) plus -> . ID PLUS exp
+    (20) plus -> . NUM PLUS exp
+    (21) times -> . ID TIMES exp
+    (22) times -> . NUM TIMES exp
+    (18) eval -> . EVAL LPAREN ID COMMA ID COMMA cmds RPAREN
+    (27) zero -> . ZERO LPAREN ID RPAREN
+    (28) equal -> . ID EQUAL exp
+
+    TERMINO         reduce using rule 6 (cmds -> cmd .)
+    FIM             reduce using rule 6 (cmds -> cmd .)
+    RPAREN          reduce using rule 6 (cmds -> cmd .)
+    ENQUANTO        shift and go to state 21
+    IF              shift and go to state 23
+    ID              shift and go to state 22
+    NUM             shift and go to state 24
+    EVAL            shift and go to state 25
+    ZERO            shift and go to state 26
+
+    cmd                            shift and go to state 12
+    cmds                           shift and go to state 28
+    while                          shift and go to state 13
+    if                             shift and go to state 14
+    ifelse                         shift and go to state 15
+    plus                           shift and go to state 16
+    times                          shift and go to state 17
+    eval                           shift and go to state 18
+    zero                           shift and go to state 19
+    equal                          shift and go to state 20
+
+state 13
+
+    (7) cmd -> while .
+
+    ENQUANTO        reduce using rule 7 (cmd -> while .)
+    IF              reduce using rule 7 (cmd -> while .)
+    ID              reduce using rule 7 (cmd -> while .)
+    NUM             reduce using rule 7 (cmd -> while .)
+    EVAL            reduce using rule 7 (cmd -> while .)
+    ZERO            reduce using rule 7 (cmd -> while .)
+    TERMINO         reduce using rule 7 (cmd -> while .)
+    FIM             reduce using rule 7 (cmd -> while .)
+    RPAREN          reduce using rule 7 (cmd -> while .)
+    ELSE            reduce using rule 7 (cmd -> while .)
+
+
+state 14
+
+    (8) cmd -> if .
+
+    ENQUANTO        reduce using rule 8 (cmd -> if .)
+    IF              reduce using rule 8 (cmd -> if .)
+    ID              reduce using rule 8 (cmd -> if .)
+    NUM             reduce using rule 8 (cmd -> if .)
+    EVAL            reduce using rule 8 (cmd -> if .)
+    ZERO            reduce using rule 8 (cmd -> if .)
+    TERMINO         reduce using rule 8 (cmd -> if .)
+    FIM             reduce using rule 8 (cmd -> if .)
+    RPAREN          reduce using rule 8 (cmd -> if .)
+    ELSE            reduce using rule 8 (cmd -> if .)
+
+
+state 15
+
+    (9) cmd -> ifelse .
+
+    ENQUANTO        reduce using rule 9 (cmd -> ifelse .)
+    IF              reduce using rule 9 (cmd -> ifelse .)
+    ID              reduce using rule 9 (cmd -> ifelse .)
+    NUM             reduce using rule 9 (cmd -> ifelse .)
+    EVAL            reduce using rule 9 (cmd -> ifelse .)
+    ZERO            reduce using rule 9 (cmd -> ifelse .)
+    TERMINO         reduce using rule 9 (cmd -> ifelse .)
+    FIM             reduce using rule 9 (cmd -> ifelse .)
+    RPAREN          reduce using rule 9 (cmd -> ifelse .)
+    ELSE            reduce using rule 9 (cmd -> ifelse .)
+
+
+state 16
+
+    (10) cmd -> plus .
+
+    ENQUANTO        reduce using rule 10 (cmd -> plus .)
+    IF              reduce using rule 10 (cmd -> plus .)
+    ID              reduce using rule 10 (cmd -> plus .)
+    NUM             reduce using rule 10 (cmd -> plus .)
+    EVAL            reduce using rule 10 (cmd -> plus .)
+    ZERO            reduce using rule 10 (cmd -> plus .)
+    TERMINO         reduce using rule 10 (cmd -> plus .)
+    FIM             reduce using rule 10 (cmd -> plus .)
+    RPAREN          reduce using rule 10 (cmd -> plus .)
+    ELSE            reduce using rule 10 (cmd -> plus .)
+
+
+state 17
+
+    (11) cmd -> times .
+
+    ENQUANTO        reduce using rule 11 (cmd -> times .)
+    IF              reduce using rule 11 (cmd -> times .)
+    ID              reduce using rule 11 (cmd -> times .)
+    NUM             reduce using rule 11 (cmd -> times .)
+    EVAL            reduce using rule 11 (cmd -> times .)
+    ZERO            reduce using rule 11 (cmd -> times .)
+    TERMINO         reduce using rule 11 (cmd -> times .)
+    FIM             reduce using rule 11 (cmd -> times .)
+    RPAREN          reduce using rule 11 (cmd -> times .)
+    ELSE            reduce using rule 11 (cmd -> times .)
+
+
+state 18
+
+    (12) cmd -> eval .
+
+    ENQUANTO        reduce using rule 12 (cmd -> eval .)
+    IF              reduce using rule 12 (cmd -> eval .)
+    ID              reduce using rule 12 (cmd -> eval .)
+    NUM             reduce using rule 12 (cmd -> eval .)
+    EVAL            reduce using rule 12 (cmd -> eval .)
+    ZERO            reduce using rule 12 (cmd -> eval .)
+    TERMINO         reduce using rule 12 (cmd -> eval .)
+    FIM             reduce using rule 12 (cmd -> eval .)
+    RPAREN          reduce using rule 12 (cmd -> eval .)
+    ELSE            reduce using rule 12 (cmd -> eval .)
+
+
+state 19
+
+    (13) cmd -> zero .
+
+    ENQUANTO        reduce using rule 13 (cmd -> zero .)
+    IF              reduce using rule 13 (cmd -> zero .)
+    ID              reduce using rule 13 (cmd -> zero .)
+    NUM             reduce using rule 13 (cmd -> zero .)
+    EVAL            reduce using rule 13 (cmd -> zero .)
+    ZERO            reduce using rule 13 (cmd -> zero .)
+    TERMINO         reduce using rule 13 (cmd -> zero .)
+    FIM             reduce using rule 13 (cmd -> zero .)
+    RPAREN          reduce using rule 13 (cmd -> zero .)
+    ELSE            reduce using rule 13 (cmd -> zero .)
+
+
+state 20
+
+    (14) cmd -> equal .
+
+    ENQUANTO        reduce using rule 14 (cmd -> equal .)
+    IF              reduce using rule 14 (cmd -> equal .)
+    ID              reduce using rule 14 (cmd -> equal .)
+    NUM             reduce using rule 14 (cmd -> equal .)
+    EVAL            reduce using rule 14 (cmd -> equal .)
+    ZERO            reduce using rule 14 (cmd -> equal .)
+    TERMINO         reduce using rule 14 (cmd -> equal .)
+    FIM             reduce using rule 14 (cmd -> equal .)
+    RPAREN          reduce using rule 14 (cmd -> equal .)
+    ELSE            reduce using rule 14 (cmd -> equal .)
+
+
+state 21
+
+    (15) while -> ENQUANTO . ID FACA cmds FIM
+
+    ID              shift and go to state 29
+
+
+state 22
+
+    (19) plus -> ID . PLUS exp
+    (21) times -> ID . TIMES exp
+    (28) equal -> ID . EQUAL exp
+
+    PLUS            shift and go to state 30
+    TIMES           shift and go to state 31
+    EQUAL           shift and go to state 32
+
+
+state 23
+
+    (16) if -> IF . ID THEN cmd
+    (17) ifelse -> IF . ID THEN cmd ELSE cmd
+
+    ID              shift and go to state 33
+
+
+state 24
+
+    (20) plus -> NUM . PLUS exp
+    (22) times -> NUM . TIMES exp
+
+    PLUS            shift and go to state 34
+    TIMES           shift and go to state 35
+
+
+state 25
+
+    (18) eval -> EVAL . LPAREN ID COMMA ID COMMA cmds RPAREN
+
+    LPAREN          shift and go to state 36
+
+
+state 26
+
+    (27) zero -> ZERO . LPAREN ID RPAREN
+
+    LPAREN          shift and go to state 37
+
+
+state 27
+
+    (1) programa -> INICIO varlist monitor_varlist EXECUTE cmds TERMINO .
+
+    $end            reduce using rule 1 (programa -> INICIO varlist monitor_varlist EXECUTE cmds TERMINO .)
+
+
+state 28
+
+    (5) cmds -> cmd cmds .
+
+    TERMINO         reduce using rule 5 (cmds -> cmd cmds .)
+    FIM             reduce using rule 5 (cmds -> cmd cmds .)
+    RPAREN          reduce using rule 5 (cmds -> cmd cmds .)
+
+
+state 29
+
+    (15) while -> ENQUANTO ID . FACA cmds FIM
+
+    FACA            shift and go to state 38
+
+
+state 30
+
+    (19) plus -> ID PLUS . exp
+    (23) exp -> . ID
+    (24) exp -> . NUM
+    (25) exp -> . plus
+    (26) exp -> . times
+    (19) plus -> . ID PLUS exp
+    (20) plus -> . NUM PLUS exp
+    (21) times -> . ID TIMES exp
+    (22) times -> . NUM TIMES exp
+
+    ID              shift and go to state 39
+    NUM             shift and go to state 41
+
+    exp                            shift and go to state 40
+    plus                           shift and go to state 42
+    times                          shift and go to state 43
+
+state 31
+
+    (21) times -> ID TIMES . exp
+    (23) exp -> . ID
+    (24) exp -> . NUM
+    (25) exp -> . plus
+    (26) exp -> . times
+    (19) plus -> . ID PLUS exp
+    (20) plus -> . NUM PLUS exp
+    (21) times -> . ID TIMES exp
+    (22) times -> . NUM TIMES exp
+
+    ID              shift and go to state 39
+    NUM             shift and go to state 41
+
+    exp                            shift and go to state 44
+    plus                           shift and go to state 42
+    times                          shift and go to state 43
+
+state 32
+
+    (28) equal -> ID EQUAL . exp
+    (23) exp -> . ID
+    (24) exp -> . NUM
+    (25) exp -> . plus
+    (26) exp -> . times
+    (19) plus -> . ID PLUS exp
+    (20) plus -> . NUM PLUS exp
+    (21) times -> . ID TIMES exp
+    (22) times -> . NUM TIMES exp
+
+    ID              shift and go to state 39
+    NUM             shift and go to state 41
+
+    exp                            shift and go to state 45
+    plus                           shift and go to state 42
+    times                          shift and go to state 43
+
+state 33
+
+    (16) if -> IF ID . THEN cmd
+    (17) ifelse -> IF ID . THEN cmd ELSE cmd
+
+    THEN            shift and go to state 46
+
+
+state 34
+
+    (20) plus -> NUM PLUS . exp
+    (23) exp -> . ID
+    (24) exp -> . NUM
+    (25) exp -> . plus
+    (26) exp -> . times
+    (19) plus -> . ID PLUS exp
+    (20) plus -> . NUM PLUS exp
+    (21) times -> . ID TIMES exp
+    (22) times -> . NUM TIMES exp
+
+    ID              shift and go to state 39
+    NUM             shift and go to state 41
+
+    exp                            shift and go to state 47
+    plus                           shift and go to state 42
+    times                          shift and go to state 43
+
+state 35
+
+    (22) times -> NUM TIMES . exp
+    (23) exp -> . ID
+    (24) exp -> . NUM
+    (25) exp -> . plus
+    (26) exp -> . times
+    (19) plus -> . ID PLUS exp
+    (20) plus -> . NUM PLUS exp
+    (21) times -> . ID TIMES exp
+    (22) times -> . NUM TIMES exp
+
+    ID              shift and go to state 39
+    NUM             shift and go to state 41
+
+    exp                            shift and go to state 48
+    plus                           shift and go to state 42
+    times                          shift and go to state 43
+
+state 36
+
+    (18) eval -> EVAL LPAREN . ID COMMA ID COMMA cmds RPAREN
+
+    ID              shift and go to state 49
+
+
+state 37
+
+    (27) zero -> ZERO LPAREN . ID RPAREN
+
+    ID              shift and go to state 50
+
+
+state 38
+
+    (15) while -> ENQUANTO ID FACA . cmds FIM
+    (5) cmds -> . cmd cmds
+    (6) cmds -> . cmd
+    (7) cmd -> . while
+    (8) cmd -> . if
+    (9) cmd -> . ifelse
+    (10) cmd -> . plus
+    (11) cmd -> . times
+    (12) cmd -> . eval
+    (13) cmd -> . zero
+    (14) cmd -> . equal
+    (15) while -> . ENQUANTO ID FACA cmds FIM
+    (16) if -> . IF ID THEN cmd
+    (17) ifelse -> . IF ID THEN cmd ELSE cmd
+    (19) plus -> . ID PLUS exp
+    (20) plus -> . NUM PLUS exp
+    (21) times -> . ID TIMES exp
+    (22) times -> . NUM TIMES exp
+    (18) eval -> . EVAL LPAREN ID COMMA ID COMMA cmds RPAREN
+    (27) zero -> . ZERO LPAREN ID RPAREN
+    (28) equal -> . ID EQUAL exp
+
+    ENQUANTO        shift and go to state 21
+    IF              shift and go to state 23
+    ID              shift and go to state 22
+    NUM             shift and go to state 24
+    EVAL            shift and go to state 25
+    ZERO            shift and go to state 26
+
+    cmds                           shift and go to state 51
+    cmd                            shift and go to state 12
+    while                          shift and go to state 13
+    if                             shift and go to state 14
+    ifelse                         shift and go to state 15
+    plus                           shift and go to state 16
+    times                          shift and go to state 17
+    eval                           shift and go to state 18
+    zero                           shift and go to state 19
+    equal                          shift and go to state 20
+
+state 39
+
+    (23) exp -> ID .
+    (19) plus -> ID . PLUS exp
+    (21) times -> ID . TIMES exp
+
+    ENQUANTO        reduce using rule 23 (exp -> ID .)
+    IF              reduce using rule 23 (exp -> ID .)
+    ID              reduce using rule 23 (exp -> ID .)
+    NUM             reduce using rule 23 (exp -> ID .)
+    EVAL            reduce using rule 23 (exp -> ID .)
+    ZERO            reduce using rule 23 (exp -> ID .)
+    TERMINO         reduce using rule 23 (exp -> ID .)
+    FIM             reduce using rule 23 (exp -> ID .)
+    RPAREN          reduce using rule 23 (exp -> ID .)
+    ELSE            reduce using rule 23 (exp -> ID .)
+    PLUS            shift and go to state 30
+    TIMES           shift and go to state 31
+
+
+state 40
+
+    (19) plus -> ID PLUS exp .
+
+    ENQUANTO        reduce using rule 19 (plus -> ID PLUS exp .)
+    IF              reduce using rule 19 (plus -> ID PLUS exp .)
+    ID              reduce using rule 19 (plus -> ID PLUS exp .)
+    NUM             reduce using rule 19 (plus -> ID PLUS exp .)
+    EVAL            reduce using rule 19 (plus -> ID PLUS exp .)
+    ZERO            reduce using rule 19 (plus -> ID PLUS exp .)
+    TERMINO         reduce using rule 19 (plus -> ID PLUS exp .)
+    FIM             reduce using rule 19 (plus -> ID PLUS exp .)
+    RPAREN          reduce using rule 19 (plus -> ID PLUS exp .)
+    ELSE            reduce using rule 19 (plus -> ID PLUS exp .)
+
+
+state 41
+
+    (24) exp -> NUM .
+    (20) plus -> NUM . PLUS exp
+    (22) times -> NUM . TIMES exp
+
+    ENQUANTO        reduce using rule 24 (exp -> NUM .)
+    IF              reduce using rule 24 (exp -> NUM .)
+    ID              reduce using rule 24 (exp -> NUM .)
+    NUM             reduce using rule 24 (exp -> NUM .)
+    EVAL            reduce using rule 24 (exp -> NUM .)
+    ZERO            reduce using rule 24 (exp -> NUM .)
+    TERMINO         reduce using rule 24 (exp -> NUM .)
+    FIM             reduce using rule 24 (exp -> NUM .)
+    RPAREN          reduce using rule 24 (exp -> NUM .)
+    ELSE            reduce using rule 24 (exp -> NUM .)
+    PLUS            shift and go to state 34
+    TIMES           shift and go to state 35
+
+
+state 42
+
+    (25) exp -> plus .
+
+    ENQUANTO        reduce using rule 25 (exp -> plus .)
+    IF              reduce using rule 25 (exp -> plus .)
+    ID              reduce using rule 25 (exp -> plus .)
+    NUM             reduce using rule 25 (exp -> plus .)
+    EVAL            reduce using rule 25 (exp -> plus .)
+    ZERO            reduce using rule 25 (exp -> plus .)
+    TERMINO         reduce using rule 25 (exp -> plus .)
+    FIM             reduce using rule 25 (exp -> plus .)
+    RPAREN          reduce using rule 25 (exp -> plus .)
+    ELSE            reduce using rule 25 (exp -> plus .)
+
+
+state 43
+
+    (26) exp -> times .
+
+    ENQUANTO        reduce using rule 26 (exp -> times .)
+    IF              reduce using rule 26 (exp -> times .)
+    ID              reduce using rule 26 (exp -> times .)
+    NUM             reduce using rule 26 (exp -> times .)
+    EVAL            reduce using rule 26 (exp -> times .)
+    ZERO            reduce using rule 26 (exp -> times .)
+    TERMINO         reduce using rule 26 (exp -> times .)
+    FIM             reduce using rule 26 (exp -> times .)
+    RPAREN          reduce using rule 26 (exp -> times .)
+    ELSE            reduce using rule 26 (exp -> times .)
+
+
+state 44
+
+    (21) times -> ID TIMES exp .
+
+    ENQUANTO        reduce using rule 21 (times -> ID TIMES exp .)
+    IF              reduce using rule 21 (times -> ID TIMES exp .)
+    ID              reduce using rule 21 (times -> ID TIMES exp .)
+    NUM             reduce using rule 21 (times -> ID TIMES exp .)
+    EVAL            reduce using rule 21 (times -> ID TIMES exp .)
+    ZERO            reduce using rule 21 (times -> ID TIMES exp .)
+    TERMINO         reduce using rule 21 (times -> ID TIMES exp .)
+    FIM             reduce using rule 21 (times -> ID TIMES exp .)
+    RPAREN          reduce using rule 21 (times -> ID TIMES exp .)
+    ELSE            reduce using rule 21 (times -> ID TIMES exp .)
+
+
+state 45
+
+    (28) equal -> ID EQUAL exp .
+
+    ENQUANTO        reduce using rule 28 (equal -> ID EQUAL exp .)
+    IF              reduce using rule 28 (equal -> ID EQUAL exp .)
+    ID              reduce using rule 28 (equal -> ID EQUAL exp .)
+    NUM             reduce using rule 28 (equal -> ID EQUAL exp .)
+    EVAL            reduce using rule 28 (equal -> ID EQUAL exp .)
+    ZERO            reduce using rule 28 (equal -> ID EQUAL exp .)
+    TERMINO         reduce using rule 28 (equal -> ID EQUAL exp .)
+    FIM             reduce using rule 28 (equal -> ID EQUAL exp .)
+    RPAREN          reduce using rule 28 (equal -> ID EQUAL exp .)
+    ELSE            reduce using rule 28 (equal -> ID EQUAL exp .)
+
+
+state 46
+
+    (16) if -> IF ID THEN . cmd
+    (17) ifelse -> IF ID THEN . cmd ELSE cmd
+    (7) cmd -> . while
+    (8) cmd -> . if
+    (9) cmd -> . ifelse
+    (10) cmd -> . plus
+    (11) cmd -> . times
+    (12) cmd -> . eval
+    (13) cmd -> . zero
+    (14) cmd -> . equal
+    (15) while -> . ENQUANTO ID FACA cmds FIM
+    (16) if -> . IF ID THEN cmd
+    (17) ifelse -> . IF ID THEN cmd ELSE cmd
+    (19) plus -> . ID PLUS exp
+    (20) plus -> . NUM PLUS exp
+    (21) times -> . ID TIMES exp
+    (22) times -> . NUM TIMES exp
+    (18) eval -> . EVAL LPAREN ID COMMA ID COMMA cmds RPAREN
+    (27) zero -> . ZERO LPAREN ID RPAREN
+    (28) equal -> . ID EQUAL exp
+
+    ENQUANTO        shift and go to state 21
+    IF              shift and go to state 23
+    ID              shift and go to state 22
+    NUM             shift and go to state 24
+    EVAL            shift and go to state 25
+    ZERO            shift and go to state 26
+
+    cmd                            shift and go to state 52
+    while                          shift and go to state 13
+    if                             shift and go to state 14
+    ifelse                         shift and go to state 15
+    plus                           shift and go to state 16
+    times                          shift and go to state 17
+    eval                           shift and go to state 18
+    zero                           shift and go to state 19
+    equal                          shift and go to state 20
+
+state 47
+
+    (20) plus -> NUM PLUS exp .
+
+    ENQUANTO        reduce using rule 20 (plus -> NUM PLUS exp .)
+    IF              reduce using rule 20 (plus -> NUM PLUS exp .)
+    ID              reduce using rule 20 (plus -> NUM PLUS exp .)
+    NUM             reduce using rule 20 (plus -> NUM PLUS exp .)
+    EVAL            reduce using rule 20 (plus -> NUM PLUS exp .)
+    ZERO            reduce using rule 20 (plus -> NUM PLUS exp .)
+    TERMINO         reduce using rule 20 (plus -> NUM PLUS exp .)
+    FIM             reduce using rule 20 (plus -> NUM PLUS exp .)
+    RPAREN          reduce using rule 20 (plus -> NUM PLUS exp .)
+    ELSE            reduce using rule 20 (plus -> NUM PLUS exp .)
+
+
+state 48
+
+    (22) times -> NUM TIMES exp .
+
+    ENQUANTO        reduce using rule 22 (times -> NUM TIMES exp .)
+    IF              reduce using rule 22 (times -> NUM TIMES exp .)
+    ID              reduce using rule 22 (times -> NUM TIMES exp .)
+    NUM             reduce using rule 22 (times -> NUM TIMES exp .)
+    EVAL            reduce using rule 22 (times -> NUM TIMES exp .)
+    ZERO            reduce using rule 22 (times -> NUM TIMES exp .)
+    TERMINO         reduce using rule 22 (times -> NUM TIMES exp .)
+    FIM             reduce using rule 22 (times -> NUM TIMES exp .)
+    RPAREN          reduce using rule 22 (times -> NUM TIMES exp .)
+    ELSE            reduce using rule 22 (times -> NUM TIMES exp .)
+
+
+state 49
+
+    (18) eval -> EVAL LPAREN ID . COMMA ID COMMA cmds RPAREN
+
+    COMMA           shift and go to state 53
+
+
+state 50
+
+    (27) zero -> ZERO LPAREN ID . RPAREN
+
+    RPAREN          shift and go to state 54
+
+
+state 51
+
+    (15) while -> ENQUANTO ID FACA cmds . FIM
+
+    FIM             shift and go to state 55
+
+
+state 52
+
+    (16) if -> IF ID THEN cmd .
+    (17) ifelse -> IF ID THEN cmd . ELSE cmd
+
+  ! shift/reduce conflict for ELSE resolved as shift
+    ENQUANTO        reduce using rule 16 (if -> IF ID THEN cmd .)
+    IF              reduce using rule 16 (if -> IF ID THEN cmd .)
+    ID              reduce using rule 16 (if -> IF ID THEN cmd .)
+    NUM             reduce using rule 16 (if -> IF ID THEN cmd .)
+    EVAL            reduce using rule 16 (if -> IF ID THEN cmd .)
+    ZERO            reduce using rule 16 (if -> IF ID THEN cmd .)
+    TERMINO         reduce using rule 16 (if -> IF ID THEN cmd .)
+    FIM             reduce using rule 16 (if -> IF ID THEN cmd .)
+    RPAREN          reduce using rule 16 (if -> IF ID THEN cmd .)
+    ELSE            shift and go to state 56
+
+  ! ELSE            [ reduce using rule 16 (if -> IF ID THEN cmd .) ]
+
+
+state 53
+
+    (18) eval -> EVAL LPAREN ID COMMA . ID COMMA cmds RPAREN
+
+    ID              shift and go to state 57
+
+
+state 54
+
+    (27) zero -> ZERO LPAREN ID RPAREN .
+
+    ENQUANTO        reduce using rule 27 (zero -> ZERO LPAREN ID RPAREN .)
+    IF              reduce using rule 27 (zero -> ZERO LPAREN ID RPAREN .)
+    ID              reduce using rule 27 (zero -> ZERO LPAREN ID RPAREN .)
+    NUM             reduce using rule 27 (zero -> ZERO LPAREN ID RPAREN .)
+    EVAL            reduce using rule 27 (zero -> ZERO LPAREN ID RPAREN .)
+    ZERO            reduce using rule 27 (zero -> ZERO LPAREN ID RPAREN .)
+    TERMINO         reduce using rule 27 (zero -> ZERO LPAREN ID RPAREN .)
+    FIM             reduce using rule 27 (zero -> ZERO LPAREN ID RPAREN .)
+    RPAREN          reduce using rule 27 (zero -> ZERO LPAREN ID RPAREN .)
+    ELSE            reduce using rule 27 (zero -> ZERO LPAREN ID RPAREN .)
+
+
+state 55
+
+    (15) while -> ENQUANTO ID FACA cmds FIM .
+
+    ENQUANTO        reduce using rule 15 (while -> ENQUANTO ID FACA cmds FIM .)
+    IF              reduce using rule 15 (while -> ENQUANTO ID FACA cmds FIM .)
+    ID              reduce using rule 15 (while -> ENQUANTO ID FACA cmds FIM .)
+    NUM             reduce using rule 15 (while -> ENQUANTO ID FACA cmds FIM .)
+    EVAL            reduce using rule 15 (while -> ENQUANTO ID FACA cmds FIM .)
+    ZERO            reduce using rule 15 (while -> ENQUANTO ID FACA cmds FIM .)
+    TERMINO         reduce using rule 15 (while -> ENQUANTO ID FACA cmds FIM .)
+    FIM             reduce using rule 15 (while -> ENQUANTO ID FACA cmds FIM .)
+    RPAREN          reduce using rule 15 (while -> ENQUANTO ID FACA cmds FIM .)
+    ELSE            reduce using rule 15 (while -> ENQUANTO ID FACA cmds FIM .)
+
+
+state 56
+
+    (17) ifelse -> IF ID THEN cmd ELSE . cmd
+    (7) cmd -> . while
+    (8) cmd -> . if
+    (9) cmd -> . ifelse
+    (10) cmd -> . plus
+    (11) cmd -> . times
+    (12) cmd -> . eval
+    (13) cmd -> . zero
+    (14) cmd -> . equal
+    (15) while -> . ENQUANTO ID FACA cmds FIM
+    (16) if -> . IF ID THEN cmd
+    (17) ifelse -> . IF ID THEN cmd ELSE cmd
+    (19) plus -> . ID PLUS exp
+    (20) plus -> . NUM PLUS exp
+    (21) times -> . ID TIMES exp
+    (22) times -> . NUM TIMES exp
+    (18) eval -> . EVAL LPAREN ID COMMA ID COMMA cmds RPAREN
+    (27) zero -> . ZERO LPAREN ID RPAREN
+    (28) equal -> . ID EQUAL exp
+
+    ENQUANTO        shift and go to state 21
+    IF              shift and go to state 23
+    ID              shift and go to state 22
+    NUM             shift and go to state 24
+    EVAL            shift and go to state 25
+    ZERO            shift and go to state 26
+
+    cmd                            shift and go to state 58
+    while                          shift and go to state 13
+    if                             shift and go to state 14
+    ifelse                         shift and go to state 15
+    plus                           shift and go to state 16
+    times                          shift and go to state 17
+    eval                           shift and go to state 18
+    zero                           shift and go to state 19
+    equal                          shift and go to state 20
+
+state 57
+
+    (18) eval -> EVAL LPAREN ID COMMA ID . COMMA cmds RPAREN
+
+    COMMA           shift and go to state 59
+
+
+state 58
+
+    (17) ifelse -> IF ID THEN cmd ELSE cmd .
+
+    ENQUANTO        reduce using rule 17 (ifelse -> IF ID THEN cmd ELSE cmd .)
+    IF              reduce using rule 17 (ifelse -> IF ID THEN cmd ELSE cmd .)
+    ID              reduce using rule 17 (ifelse -> IF ID THEN cmd ELSE cmd .)
+    NUM             reduce using rule 17 (ifelse -> IF ID THEN cmd ELSE cmd .)
+    EVAL            reduce using rule 17 (ifelse -> IF ID THEN cmd ELSE cmd .)
+    ZERO            reduce using rule 17 (ifelse -> IF ID THEN cmd ELSE cmd .)
+    TERMINO         reduce using rule 17 (ifelse -> IF ID THEN cmd ELSE cmd .)
+    FIM             reduce using rule 17 (ifelse -> IF ID THEN cmd ELSE cmd .)
+    RPAREN          reduce using rule 17 (ifelse -> IF ID THEN cmd ELSE cmd .)
+    ELSE            reduce using rule 17 (ifelse -> IF ID THEN cmd ELSE cmd .)
+
+
+state 59
+
+    (18) eval -> EVAL LPAREN ID COMMA ID COMMA . cmds RPAREN
+    (5) cmds -> . cmd cmds
+    (6) cmds -> . cmd
+    (7) cmd -> . while
+    (8) cmd -> . if
+    (9) cmd -> . ifelse
+    (10) cmd -> . plus
+    (11) cmd -> . times
+    (12) cmd -> . eval
+    (13) cmd -> . zero
+    (14) cmd -> . equal
+    (15) while -> . ENQUANTO ID FACA cmds FIM
+    (16) if -> . IF ID THEN cmd
+    (17) ifelse -> . IF ID THEN cmd ELSE cmd
+    (19) plus -> . ID PLUS exp
+    (20) plus -> . NUM PLUS exp
+    (21) times -> . ID TIMES exp
+    (22) times -> . NUM TIMES exp
+    (18) eval -> . EVAL LPAREN ID COMMA ID COMMA cmds RPAREN
+    (27) zero -> . ZERO LPAREN ID RPAREN
+    (28) equal -> . ID EQUAL exp
+
+    ENQUANTO        shift and go to state 21
+    IF              shift and go to state 23
+    ID              shift and go to state 22
+    NUM             shift and go to state 24
+    EVAL            shift and go to state 25
+    ZERO            shift and go to state 26
+
+    cmds                           shift and go to state 60
+    cmd                            shift and go to state 12
+    while                          shift and go to state 13
+    if                             shift and go to state 14
+    ifelse                         shift and go to state 15
+    plus                           shift and go to state 16
+    times                          shift and go to state 17
+    eval                           shift and go to state 18
+    zero                           shift and go to state 19
+    equal                          shift and go to state 20
+
+state 60
+
+    (18) eval -> EVAL LPAREN ID COMMA ID COMMA cmds . RPAREN
+
+    RPAREN          shift and go to state 61
+
+
+state 61
+
+    (18) eval -> EVAL LPAREN ID COMMA ID COMMA cmds RPAREN .
+
+    ENQUANTO        reduce using rule 18 (eval -> EVAL LPAREN ID COMMA ID COMMA cmds RPAREN .)
+    IF              reduce using rule 18 (eval -> EVAL LPAREN ID COMMA ID COMMA cmds RPAREN .)
+    ID              reduce using rule 18 (eval -> EVAL LPAREN ID COMMA ID COMMA cmds RPAREN .)
+    NUM             reduce using rule 18 (eval -> EVAL LPAREN ID COMMA ID COMMA cmds RPAREN .)
+    EVAL            reduce using rule 18 (eval -> EVAL LPAREN ID COMMA ID COMMA cmds RPAREN .)
+    ZERO            reduce using rule 18 (eval -> EVAL LPAREN ID COMMA ID COMMA cmds RPAREN .)
+    TERMINO         reduce using rule 18 (eval -> EVAL LPAREN ID COMMA ID COMMA cmds RPAREN .)
+    FIM             reduce using rule 18 (eval -> EVAL LPAREN ID COMMA ID COMMA cmds RPAREN .)
+    RPAREN          reduce using rule 18 (eval -> EVAL LPAREN ID COMMA ID COMMA cmds RPAREN .)
+    ELSE            reduce using rule 18 (eval -> EVAL LPAREN ID COMMA ID COMMA cmds RPAREN .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for ELSE in state 52 resolved as shift
